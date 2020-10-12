@@ -14,8 +14,8 @@
 set SCRIPT_DIR (realpath (dirname (status -f)))
 
 # load currently active theme...
-if test -e ~/.base16_theme
-  eval sh '"'(realpath ~/.base16_theme)'"'
+if test -e "$XDG_CACHE_HOME/base16_theme"
+  eval sh '"'(realpath "$XDG_CACHE_HOME/base16_theme")'"'
 end
 
 
@@ -24,8 +24,7 @@ for SCRIPT in $SCRIPT_DIR/scripts/*.sh
   set THEME (basename $SCRIPT .sh)
   function $THEME -V SCRIPT -V THEME
     eval sh '"'$SCRIPT'"'
-    ln -sf $SCRIPT ~/.base16_theme
+    ln -sf $SCRIPT "$XDG_CACHE_HOME/base16_theme"
     set -x BASE16_THEME (string split -m 1 '-' $THEME)[2]
-    echo -e "if !exists('g:colors_name') || g:colors_name != '$THEME'\n  colorscheme $THEME\nendif" >  ~/.vimrc_background
   end
 end for
