@@ -20,7 +20,7 @@ _base16()
   local theme=$2
   [ -f $script ] && . $script
   ln -fs $script $XDG_CACHE_HOME/base16_theme
-  export BASE16_THEME=${theme}
+  export BASE16_THEME=base16-${theme}
   if [ -n ${BASE16_SHELL_HOOKS:+s} ] && [ -d "${BASE16_SHELL_HOOKS}" ]; then
     for hook in $BASE16_SHELL_HOOKS/*; do
       [ -f "$hook" ] && [ -x "$hook" ] && "$hook"
